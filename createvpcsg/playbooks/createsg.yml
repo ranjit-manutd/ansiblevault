@@ -1,0 +1,27 @@
+---
+# Basic provisioning example
+- name: Create AWS resources
+  hosts: localhost
+  connection: local
+  vars_files:
+    - var.yml
+  gather_facts: False
+  tasks:
+  - name: Create a security group
+    ec2_group:
+      name: ansible
+      description: "Ansible Security Group"
+      region:  "{{aws_region}}"
+      vpc_id: "{{vpc_id}}"
+      aws_access_key: "{{aws_access_key}}"
+      aws_secret_key: "{{aws_secret_key}}"
+
+      rules:
+        - proto: all
+          cidr_ip: "{{cidr_ip}}"
+        - proto: all
+          group_name: ansible
+      rules_egress:
+        - proto: all
+          cidr_ip: "0.0.0.0/0"
+    register: firewall

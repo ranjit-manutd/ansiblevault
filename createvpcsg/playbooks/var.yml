@@ -1,0 +1,5 @@
+aws_access_key: AK3IAJKHTBLI4SVNLQZOA
+aws_secret_key: il3nMV3S8KouDmUIXl7dCoK6Tl6fzYkosB1FXDs1g
+aws_region: us-east-1
+vpc_id: vpc-93663be8
+cidr_ip: 14.140.150.250/32
