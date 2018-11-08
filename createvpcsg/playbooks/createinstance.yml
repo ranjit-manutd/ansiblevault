@@ -1,0 +1,38 @@
+---
+# Basic provisioning example
+- name: Create AWS resources
+  hosts: localhost
+  connection: local
+  vars_files:
+    - var.yml
+  gather_facts: False
+
+# Single instance with standard root volume
+  tasks:
+  - name: Create an EC2 instance
+    ec2:
+     key_name: Linux01
+     group: ansible
+     instance_type: t2.nano
+     image: ami-013be31976ca2c322
+     region:  "{{aws_region}}"
+     aws_access_key: "{{aws_access_key}}"
+     aws_secret_key: "{{aws_secret_key}}"
+     count: 1
+     wait: yes
+     wait_timeout: 500
+     volumes:
+       - device_name: /dev/xvda
+         volume_type: standard
+         volume_size: 8
+     vpc_subnet_id: subnet-5430d908
+     assign_public_ip: no
+     instance_tags:
+       Name: AnsibleTestserver
+       CostCenter: MyCost
+
+
+
+
+
+
