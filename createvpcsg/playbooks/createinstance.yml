@@ -4,7 +4,8 @@
   hosts: localhost
   connection: local
   vars_files:
-    - var.yml
+    - ../host_vars/var.yml
+    - ../host_vars/vault.yml
   gather_facts: False
 
 # Single instance with standard root volume
@@ -13,9 +14,9 @@
     ec2:
      key_name: Linux01
      group: ansible
-     instance_type: t2.nano
+     instance_type: t2.micro
      image: ami-013be31976ca2c322
-     region:  "{{aws_region}}"
+     region: "{{aws_region}}"
      aws_access_key: "{{aws_access_key}}"
      aws_secret_key: "{{aws_secret_key}}"
      count: 1
@@ -25,7 +26,7 @@
        - device_name: /dev/xvda
          volume_type: standard
          volume_size: 8
-     vpc_subnet_id: subnet-5430d908
+     vpc_subnet_id: subnet-a5aa3cc2
      assign_public_ip: no
      instance_tags:
        Name: AnsibleTestserver

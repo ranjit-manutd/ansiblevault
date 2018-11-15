@@ -1,0 +1,5 @@
+aws_access_key: "{{ vault_a }}"
+aws_secret_key: "{{ vault_b }}"
+aws_region: us-east-1
+vpc_id: vpc-cad173b0
+cidr_ip: 14.140.150.250/32
